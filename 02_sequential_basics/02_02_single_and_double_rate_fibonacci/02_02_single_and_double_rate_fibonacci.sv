@@ -33,6 +33,13 @@ module fibonacci_2
 
   // Task:
   // Implement a module that generates two fibonacci numbers per cycle
-
+  logic [15:0] num3;
+  always_ff @ (posedge clk)
+    if (rst) begin
+      { num, num2 } <= { 16'd1, 16'd1 };
+      { num3 } <= {num + num2};
+    end
+    else
+      { num, num2, num3 } <= { num3 , num3 + num2, num3 + num2 + num3};
 
 endmodule
