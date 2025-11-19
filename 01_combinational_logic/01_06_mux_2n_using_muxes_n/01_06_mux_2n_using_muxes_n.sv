@@ -26,6 +26,30 @@ module mux_4_1
 
   // Task:
   // Implement mux_4_1 using three instances of mux_2_1
+  wire [3:0] stage1_out0;
+  wire [3:0] stage1_out1;
 
+  mux_2_1 mux_stage0 (
+        .d0(d0),           // вход 0: d0
+        .d1(d1),           // вход 1: d1
+        .sel(sel[0]),      // младший бит селектора
+        .y(stage1_out0)    // выход: либо d0, либо d1
+    );
+
+
+  mux_2_1 mux_stage1 (
+      .d0(d2),           // вход 0: d0
+      .d1(d3),           // вход 1: d1
+      .sel(sel[0]),      // младший бит селектора
+      .y(stage1_out1)    // выход: либо d0, либо d1
+  );
+
+
+  mux_2_1 mux_stage2 (
+      .d0(stage1_out0),           // вход 0: d0
+      .d1(stage1_out1),           // вход 1: d1
+      .sel(sel[1]),      // младший бит селектора
+      .y(y)    // выход: либо d0, либо d1
+  );
 
 endmodule
